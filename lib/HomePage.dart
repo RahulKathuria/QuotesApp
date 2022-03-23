@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
@@ -34,13 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Stack(
         
           children: [
-             BlurHash(
-           hash: imageList![imageNumber!]['blur_hash'],
-           duration: Duration(milliseconds: 800),
-           image: imageList![imageNumber!]['urls']['regular'],
-           curve: Curves.easeInOut,
-           imageFit: BoxFit.cover,
-         ),
+             AnimatedSwitcher(
+               duration: Duration(seconds:1),
+               child: BlurHash(
+                 key: ValueKey(imageList![imageNumber!]['blur_hash']),
+                        hash: imageList![imageNumber!]['blur_hash'],
+                        duration: Duration(milliseconds: 800),
+                        image: imageList![imageNumber!]['urls']['regular'],
+                        curve: Curves.easeInOut,
+                        imageFit: BoxFit.cover,
+                      ),
+             ),
             Container(
             width: width,
             height: height,
